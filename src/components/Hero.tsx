@@ -22,8 +22,8 @@ const Hero: React.FC = () => {
     >
       {/* Enhanced Background Pattern with Parallax */}
       <motion.div 
-        className="absolute inset-0 opacity-20"
-        style={{ y: floatingY }}
+        className="absolute inset-0"
+        style={{ y: floatingY, opacity: 0.2 }}
       >
         <motion.div 
           className="absolute top-20 left-20 w-32 h-32 bg-pastel-peach rounded-full blur-3xl"

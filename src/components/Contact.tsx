@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Contact: React.FC = () => {
   const { t } = useLanguage();
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const contactMethods = [
     {
@@ -43,34 +42,29 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-pastel-cream via-pastel-honey to-pastel-mint dark:from-gray-900 dark:via-gray-800 dark:to-purple-900" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-contrast-dark-rose to-contrast-dark-lilac bg-clip-text text-transparent">
             {t('contactTitle')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {t('contactDescription')}
           </p>
-        </motion.div>
+        </div>
 
         <div className="max-w-2xl mx-auto">
           <div className="grid gap-6">
             {contactMethods.map((method, index) => (
-              <motion.a
+              <a
                 key={method.label}
                 href={method.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className={`flex items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 group active:scale-95 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+                style={{
+                  transitionDelay: isVisible ? `${index * 0.1}s` : '0s'
+                }}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-contrast-dark-peach to-contrast-dark-lavender rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
                   {method.icon}
@@ -88,7 +82,7 @@ const Contact: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
-              </motion.a>
+              </a>
             ))}
           </div>
 

@@ -2,7 +2,7 @@ export const en = {
   // Header & Navigation
   brandName: "Valenn Nails",
   portfolio: "Portfolio",
-  experience: "Experience",
+  experience: "Experience", 
   contact: "Contact",
   
   // Hero Section
@@ -24,7 +24,7 @@ export const en = {
   services: {
     traditionalGel: "Traditional and Gel Manicures",
     pedicureAesthetic: "Pedicures and Aesthetic Care",
-    customNailArt: "Personalized Nail Art",
+    customNailArt: "Custom Nail Art",
     semiPermanentPolish: "Semi-Permanent Polish",
     extensionsDecoration: "Extensions and Decoration",
     personalizedConsulting: "Personalized Consulting"
@@ -33,38 +33,38 @@ export const en = {
   // Work Experience
   jobs: {
     independent: {
-      title: "Independent Nail Technician – Pretty",
-      period: "March 2023 – Present",
-      type: "Family Business",
+      title: "Pretty podologia y estetica",
+      period: "March 2023 - Present",
       tasks: [
-        "Manicures, pedicures and personalized nail art",
-        "Modern designs adapted to current trends",
-        "Appointment management and scheduling coordination"
+        "Performing manicures, pedicures and personalized nail art.",
+        "Direct client service with modern designs adapted to trends.",
+        "Schedule management and appointment coordination."
       ]
     },
     blancs: {
-      title: "Nail Technician – Blancs Salon",
-      period: "April 2022 – February 2023",
+      title: "Nail Technician - Blancs Salon",
+      period: "April 2022 - February 2023",
       tasks: [
-        "Traditional and semi-permanent polish manicure service",
-        "Maintenance of order and hygiene in the work area"
+        "Client service in traditional manicure and semi-permanent polish.",
+        "Support in maintaining order and cleanliness of work area."
       ]
     },
     vera: {
-      title: "Nail Technician – Vera Beauty Studio",
-      period: "July 2022 – August 2022",
+      title: "Nail Technician - Verah Beauty Studio",
+      period: "March 2025",
       tasks: [
-        "Manicure and pedicure service with gel and decoration",
-        "Personalized advice according to nail type and desired style"
-      ]
-    },
-    vid: {
-      title: "Nail Technician – Vid Spa",
-      period: "June 2022 – July 2022",
-      tasks: [
-        "Nail service and general aesthetic care"
+        "Manicure and pedicure service, including gel application and decoration.",
+        "Personalized consulting to clients according to nail type and style preference."
       ]
     }
+  },
+
+  // Training
+  training: {
+    title: "Training",
+    courses: [
+      "Specialization in gels, Builder gel, Polygel and Soft Gel at Delia Duque academy"
+    ]
   },
   
   // Profile
@@ -77,12 +77,12 @@ export const en = {
   contactDescription: "Ready to transform your nails? Contact me to schedule your appointment and create the perfect design for you.",
   
   // Footer
-  footerTagline: "Professional nail art • Arte profesional en tus uñas",
+  footerTagline: "Professional art on your nails • Arte profesional en tus uñas",
   copyright: "© 2025 Valentina Dumont. All rights reserved.",
   
   // Design Descriptions
   designDescriptions: [
-    "Timeless elegant manicure with French tip",
+    "Timeless elegant manicure with french tip",
     "Cherry red manicure with glossy finish",
     "Purple manicure with glossy finish",
     "Pastel lilac manicure",
@@ -90,7 +90,7 @@ export const en = {
     "Classic red manicure with glossy finish",
     "Manicure with soft and fresh tones",
     "Soft pink manicure",
-    "Timeless elegant manicure with French tip"
+    "Timeless elegant manicure with french tip"
   ],
   
   // Legacy keys for compatibility

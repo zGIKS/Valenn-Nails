@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import GlobalStyles from './GlobalStyles';
 import SmoothScroll from './SmoothScroll';
 import Header from './Header';
-import Hero from './Hero';
-import Gallery from './Gallery';
-import About from './About';
-import Contact from './Contact';
+import HeroLight from './HeroLight';
+
+// Lazy load components
+const Gallery = lazy(() => import('./Gallery'));
+const About = lazy(() => import('./About'));
+const Contact = lazy(() => import('./Contact'));
 
 const FooterContent: React.FC = () => {
   const { t } = useLanguage();
@@ -65,27 +66,20 @@ const Portfolio: React.FC = () => {
           <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
             <Header />
             
-            <motion.main
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <Hero />
-              <Gallery />
-              <About />
-              <Contact />
-            </motion.main>
+            <main className="opacity-0 animate-fade-in">
+              <HeroLight />
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div></div>}>
+                <Gallery />
+                <About />
+                <Contact />
+              </Suspense>
+            </main>
 
           {/* Footer */}
           <footer className="bg-gray-900 dark:bg-black text-white py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-contrast-dark-rose to-contrast-dark-lilac bg-clip-text text-transparent">
+              <div>
+                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-contrast-dark-rose to-contrast-dark-lilac bg-clip-text text-transparent loading-text">
                   Valenn Nails
                 </h3>
                 <FooterContent />
@@ -104,7 +98,7 @@ const Portfolio: React.FC = () => {
                   </a>
                 </div>
                 <CopyrightFooter />
-              </motion.div>
+              </div>
             </div>
           </footer>
           </div>

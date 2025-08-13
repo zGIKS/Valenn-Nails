@@ -75,6 +75,8 @@ const Gallery: React.FC = () => {
                   <img
                     src={item.src}
                     alt={item.alt}
+                    width={400}
+                    height={400}
                     className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
                     loading="lazy"
                     onError={(e) => {
@@ -157,6 +159,8 @@ const Gallery: React.FC = () => {
                   <img
                     src={item.src}
                     alt={item.alt}
+                    width={400}
+                    height={400}
                     className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
                     loading="lazy"
                     onError={(e) => {
@@ -269,6 +273,8 @@ const Gallery: React.FC = () => {
               <img
                 src={selectedMedia.src}
                 alt={selectedMedia.alt}
+                width={800}
+                height={800}
                 className="w-full h-full object-contain"
                 style={{ 
                   maxWidth: '90vw', 

@@ -1,14 +1,14 @@
-// Import all media assets
-import img1717 from '../assets/naisl/IMG_1717.png';
-import img2604 from '../assets/naisl/IMG_2604.png';
-import img4449 from '../assets/naisl/IMG_4449.png';
+// Import optimized media assets
+import img1717 from '../assets/naisl-optimized/IMG_1717.webp';
+import img2604 from '../assets/naisl-optimized/IMG_2604.webp';
+import img4449 from '../assets/naisl-optimized/IMG_4449.webp';
 import video4795 from '../assets/naisl/IMG_4795.mp4';
-import img4867 from '../assets/naisl/IMG_4867.png';
-import img6703 from '../assets/naisl/IMG_6703.png';
-import img6797 from '../assets/naisl/IMG_6797.png';
-import img6837 from '../assets/naisl/IMG_6837.png';
-import img6843 from '../assets/naisl/IMG_6843.png';
-import img6848 from '../assets/naisl/IMG_6848.png';
+import img4867 from '../assets/naisl-optimized/IMG_4867.webp';
+import img6703 from '../assets/naisl-optimized/IMG_6703.webp';
+import img6797 from '../assets/naisl-optimized/IMG_6797.webp';
+import img6837 from '../assets/naisl-optimized/IMG_6837.webp';
+import img6843 from '../assets/naisl-optimized/IMG_6843.webp';
+import img6848 from '../assets/naisl-optimized/IMG_6848.webp';
 
 export interface MediaItem {
   src: string;

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import valeMeImage from '../assets/me/vale-me.png';
+import valeMeImage from '../assets/me/vale-me-optimized.webp?url';
 
 const About: React.FC = () => {
   const { t, language } = useLanguage();
@@ -125,9 +125,6 @@ const About: React.FC = () => {
                       {currentTranslations.jobs.independent.period}
                     </span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-                    {currentTranslations.jobs.independent.type}
-                  </p>
                   <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
                     {currentTranslations.jobs.independent.tasks.map((task: string, index: number) => (
                       <li key={index}>• {task}</li>
@@ -167,21 +164,6 @@ const About: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="border-l-4 border-contrast-dark-peach pl-6">
-                  <div className="flex items-center mb-2">
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      {currentTranslations.jobs.vid.title}
-                    </h4>
-                    <span className="ml-auto text-sm text-contrast-dark-peach font-medium">
-                      {currentTranslations.jobs.vid.period}
-                    </span>
-                  </div>
-                  <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
-                    {currentTranslations.jobs.vid.tasks.map((task: string, index: number) => (
-                      <li key={index}>• {task}</li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -207,8 +189,10 @@ const About: React.FC = () => {
               }}
             >
               <img 
-                src={valeMeImage.src} 
+                src={valeMeImage} 
                 alt={currentTranslations.profileAlt}
+                width={400}
+                height={400}
                 className="w-full h-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               />
@@ -311,8 +295,10 @@ const About: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={valeMeImage.src}
+              src={valeMeImage}
               alt={currentTranslations.profileAlt}
+              width={800}
+              height={800}
               className="w-full h-full object-contain"
               style={{ 
                 maxWidth: '90vw', 

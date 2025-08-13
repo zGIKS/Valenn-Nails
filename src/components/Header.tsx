@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -8,23 +7,15 @@ const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <motion.header 
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20"
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center"
-          >
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-contrast-dark-rose to-contrast-dark-lilac bg-clip-text text-transparent">
+          <div className="flex items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-contrast-dark-rose to-contrast-dark-lilac bg-clip-text text-transparent loading-text">
               Valenn Nails
             </h1>
-          </motion.div>
+          </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
@@ -33,53 +24,45 @@ const Header: React.FC = () => {
               { id: 'about', label: t('experience') },
               { id: 'contact', label: t('contact') }
             ].map((item) => (
-              <motion.a
+              <a
                 key={item.id}
                 href={`#${item.id}`}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   
                   const element = document.getElementById(item.id);
                   if (element) {
-                    // Simple direct scroll to element
                     element.scrollIntoView({ 
                       behavior: 'smooth', 
                       block: 'start' 
                     });
                     
-                    // Adjust for header after scroll
                     setTimeout(() => {
                       window.scrollBy(0, -100);
                     }, 300);
                   }
                 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-700 dark:text-gray-300 hover:text-contrast-dark-rose dark:hover:text-pastel-blush transition-colors duration-200 cursor-pointer"
+                className="text-gray-700 dark:text-gray-300 hover:text-contrast-dark-rose dark:hover:text-pastel-blush transition-all duration-200 cursor-pointer hover:scale-105 transform"
               >
                 {item.label}
-              </motion.a>
+              </a>
             ))}
           </nav>
 
           {/* Controls */}
           <div className="flex items-center space-x-4">
             {/* Language Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-              className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-105 transform"
             >
               {language.toUpperCase()}
-            </motion.button>
+            </button>
 
             {/* Theme Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-105 transform"
               title={t('toggleTheme')}
             >
               {isDark ? (
@@ -91,11 +74,11 @@ const Header: React.FC = () => {
                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                 </svg>
               )}
-            </motion.button>
+            </button>
           </div>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 };
 

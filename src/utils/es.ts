@@ -33,38 +33,38 @@ export const es = {
   // Work Experience
   jobs: {
     independent: {
-      title: "Manicurista Independiente – Pretty",
+      title: "Pretty podologia y estetica",
       period: "Marzo 2023 – Presente",
-      type: "Emprendimiento familiar",
       tasks: [
-        "Realización de manicuras, pedicuras y nail art personalizado",
-        "Diseños modernos adaptados a tendencias actuales",
-        "Gestión de agenda y coordinación de citas"
+        "Realización de manicuras, pedicuras y nail art personalizado.",
+        "Atención directa a clientas con diseños modernos y adaptados a tendencias.",
+        "Manejo de agenda y coordinación de citas."
       ]
     },
     blancs: {
       title: "Manicurista – Blancs Salón",
       period: "Abril 2022 – Febrero 2023",
       tasks: [
-        "Atención en manicura tradicional y con esmalte semipermanente",
-        "Mantenimiento de orden y higiene del área de trabajo"
+        "Atención a clientes en manicura tradicional y con esmalte semipermanente.",
+        "Apoyo en mantenimiento de orden y limpieza del área de trabajo."
       ]
     },
     vera: {
-      title: "Manicurista – Vera Beauty Studio",
-      period: "Julio 2022 – Agosto 2022",
+      title: "Manicurista – Verah Beauty Studio",
+      period: "Marzo 2025",
       tasks: [
-        "Servicio de manicure y pedicure con gel y decoración",
-        "Asesoría personalizada según tipo de uña y estilo deseado"
-      ]
-    },
-    vid: {
-      title: "Manicurista – Vid Spa",
-      period: "Junio 2022 – Julio 2022",
-      tasks: [
-        "Servicio de uñas y cuidado estético general"
+        "Servicio de manicure y pedicure, incluyendo aplicación de gel y decoración.",
+        "Asesoría personalizada a clientas según tipo de uña y preferencia de estilo."
       ]
     }
+  },
+
+  // Formación
+  training: {
+    title: "Formación",
+    courses: [
+      "Especialización en geles, Builder gel, Polygel y Soft Gel en la academia de Delia Duque"
+    ]
   },
   
   // Profile
