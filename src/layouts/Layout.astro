@@ -1,0 +1,84 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/a-logo-design-featuring-the-text-vale-na_3fUrjWAESb2gV3ClYI86cg_aRF8ngyuQ7Ckh-IpLOyrcg.jpeg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Valentina Dumont - Professional nail art with unique and elegant designs. Specializing in manicures, pedicures, nail art, gel polish, and extensions." />
+		<meta name="keywords" content="nail art, manicure, pedicure, gel polish, nail extensions, professional nails, nail designs" />
+		<meta name="author" content="Valentina Dumont" />
+		
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content="Professional nail art with unique and elegant designs" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/a-logo-design-featuring-the-text-vale-na_3fUrjWAESb2gV3ClYI86cg_aRF8ngyuQ7Ckh-IpLOyrcg.jpeg" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content="Professional nail art with unique and elegant designs" />
+		
+		<title>{title}</title>
+		
+		<!-- Preload critical fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	html {
+		font-family: 'Inter', system-ui, sans-serif;
+		/* Remove scroll-behavior to let JavaScript handle it */
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		overflow-x: hidden;
+	}
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+	
+	::-webkit-scrollbar-thumb {
+		background: linear-gradient(to bottom, #ffd6cc, #e6e6fa);
+		border-radius: 4px;
+	}
+	
+	::-webkit-scrollbar-thumb:hover {
+		background: linear-gradient(to bottom, #ffc0cb, #dda0dd);
+	}
+	
+	/* Dark mode scrollbar */
+	.dark ::-webkit-scrollbar-track {
+		background: #374151;
+	}
+</style>
