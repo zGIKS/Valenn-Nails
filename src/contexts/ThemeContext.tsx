@@ -15,7 +15,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (saved) {
       setIsDark(saved === 'dark');
     } else {
-      setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      setIsDark(false);
     }
   }, []);
 

@@ -39,7 +39,82 @@ const Gallery: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+        {/* Mobile: Two columns like VSCO */}
+        <div className="block sm:hidden columns-2 gap-2 space-y-2">
+          {mediaItems.map((item, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0,
+                  transition: {
+                    duration: 0.4,
+                    delay: getRandomDelay(index)
+                  }
+                }
+              }}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              whileTap={{ scale: 0.98 }}
+              className="cursor-pointer group relative break-inside-avoid mb-2"
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setClickPosition({
+                  x: rect.left,
+                  y: rect.top,
+                  width: rect.width,
+                  height: rect.height
+                });
+                setSelectedMedia(item);
+              }}
+            >
+              <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                {item.type === 'image' ? (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <video
+                    src={item.src}
+                    className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    onError={(e) => {
+                      const target = e.target as HTMLVideoElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                )}
+                
+                {/* Play icon for videos */}
+                {item.type === 'video' && (
+                  <div className="absolute top-2 right-2">
+                    <div className="bg-black/70 rounded-full p-1">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop: Masonry columns */}
+        <div className="hidden sm:block columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {mediaItems.map((item, index) => (
             <motion.div
               key={index}
