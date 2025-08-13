@@ -16,7 +16,7 @@ export const en = {
   
   // About Section
   aboutTitle: "Professional Experience",
-  aboutDescription: "Professional nail technician with over 2 years of experience specialized in modern designs, personalized nail art and advanced manicure and pedicure techniques.",
+  aboutDescription: "Hello! I'm Elvismar Valentina Dumont Santodomingo, a professional nail technician with over 2 years of experience in salons and in my own business. I specialize in manicures, pedicures, and personalized nail art, creating modern designs adapted to the latest trends so that each client feels unique and confident.",
   specializedServices: "Specialized Services",
   workExperience: "Work Experience",
   

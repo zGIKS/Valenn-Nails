@@ -16,7 +16,7 @@ export const es = {
   
   // About Section
   aboutTitle: "Experiencia Profesional",
-  aboutDescription: "Manicurista profesional con más de 2 años de experiencia especializada en diseños modernos, nail art personalizado y técnicas avanzadas de manicura y pedicura.",
+  aboutDescription: "¡Hola! Soy Elvismar Valentina Dumont Santodomingo, manicurista profesional con más de 2 años de experiencia en salones y en mi propio emprendimiento. Me especializo en manicura, pedicura y nail art personalizado, creando diseños modernos y adaptados a las últimas tendencias para que cada clienta se sienta única y segura.",
   specializedServices: "Servicios Especializados",
   workExperience: "Experiencia Laboral",
   
@@ -97,7 +97,7 @@ export const es = {
   subtitle: "Diseños únicos y elegantes para expresar tu estilo personal",
   gallery: "Portafolio",
   about: "Experiencia",
-  aboutText: "Manicurista profesional con más de 2 años de experiencia especializada en diseños modernos, nail art personalizado y técnicas avanzadas de manicura y pedicura.",
+  aboutText: "¡Hola! Soy Elvismar Valentina Dumont Santodomingo, manicurista profesional con más de 2 años de experiencia en salones y en mi propio emprendimiento. Me especializo en manicura, pedicura y nail art personalizado, creando diseños modernos y adaptados a las últimas tendencias para que cada clienta se sienta única y segura.",
   manicure: "Manicure",
   pedicure: "Pedicure",
   nailArt: "Nail Art",
