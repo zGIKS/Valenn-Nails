@@ -23,6 +23,15 @@ export default defineConfig({
             'react-vendor': ['react', 'react-dom'],
           }
         }
+      },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          unused: true,
+          dead_code: true
+        }
       }
     }
   }

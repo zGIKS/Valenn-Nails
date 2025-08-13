@@ -191,8 +191,9 @@ const About: React.FC = () => {
               <img 
                 src={valeMeImage} 
                 alt={currentTranslations.profileAlt}
-                width={400}
-                height={400}
+                width={380}
+                height={507}
+                sizes="(max-width: 768px) 380px, (max-width: 1024px) 507px, 380px"
                 className="w-full h-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               />

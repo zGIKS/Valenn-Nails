@@ -1,9 +1,48 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getMediaAssets, type MediaItem } from '../utils/mediaAssets';
 import { translations } from '../utils/translations';
+
+const VideoComponent: React.FC<{ src: string; className: string; onError: (e: React.SyntheticEvent<HTMLVideoElement>) => void }> = ({ src, className, onError }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const isVideoInView = useInView(videoContainerRef, { margin: "200px" });
+
+  useEffect(() => {
+    if (videoRef.current && isVideoInView) {
+      const video = videoRef.current;
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          // Autoplay was prevented, try to play without sound
+          video.muted = true;
+          video.play().catch(() => {
+            // If still fails, at least show the first frame
+            video.load();
+          });
+        });
+      }
+    }
+  }, [isVideoInView]);
+
+  return (
+    <div ref={videoContainerRef} className="w-full h-auto">
+      <video
+        ref={videoRef}
+        src={src}
+        className={className}
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        onError={onError}
+      />
+    </div>
+  );
+};
 
 const Gallery: React.FC = () => {
   const { t, language } = useLanguage();
@@ -75,8 +114,9 @@ const Gallery: React.FC = () => {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    width={400}
-                    height={400}
+                    width={186}
+                    height={248}
+                    sizes="(max-width: 640px) 186px, 248px"
                     className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
                     loading="lazy"
                     onError={(e) => {
@@ -85,14 +125,9 @@ const Gallery: React.FC = () => {
                     }}
                   />
                 ) : (
-                  <video
+                  <VideoComponent
                     src={item.src}
                     className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
                     onError={(e) => {
                       const target = e.target as HTMLVideoElement;
                       target.style.display = 'none';
@@ -159,8 +194,9 @@ const Gallery: React.FC = () => {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    width={400}
-                    height={400}
+                    width={186}
+                    height={248}
+                    sizes="(max-width: 768px) 186px, (max-width: 1024px) 248px, 186px"
                     className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
                     loading="lazy"
                     onError={(e) => {
@@ -169,14 +205,9 @@ const Gallery: React.FC = () => {
                     }}
                   />
                 ) : (
-                  <video
+                  <VideoComponent
                     src={item.src}
                     className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
                     onError={(e) => {
                       const target = e.target as HTMLVideoElement;
                       target.style.display = 'none';
