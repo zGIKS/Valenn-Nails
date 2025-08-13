@@ -17,50 +17,44 @@ const GlobalStyles: React.FC = () => {
         -moz-osx-font-smoothing: grayscale;
         overflow: overlay;
         scrollbar-width: thin; /* Firefox */
-        scrollbar-color: #E91E63 rgba(0, 0, 0, 0.05); /* Firefox */
+        scrollbar-color: #E91E63 transparent; /* Firefox */
       }
       
       /* Custom scrollbar for all elements */
       ::-webkit-scrollbar {
-        width: 10px;
+        width: 8px;
       }
       
       ::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.05);
-        border-radius: 8px;
+        border-radius: 4px;
       }
       
       ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #E91E63 0%, #9C27B0 50%, #673AB7 100%);
-        border-radius: 8px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+        background: #E91E63;
+        border-radius: 4px;
+        transition: all 0.2s ease;
       }
       
       ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #C2185B 0%, #8E24AA 50%, #5E35B1 100%);
-        box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
-        transform: scale(1.05);
+        background: #C2185B;
       }
       
       ::-webkit-scrollbar-thumb:active {
-        background: linear-gradient(180deg, #AD1457 0%, #7B1FA2 50%, #512DA8 100%);
+        background: #AD1457;
       }
       
       /* Dark mode scrollbar */
       .dark ::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
       }
       
       .dark ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #EC4899 0%, #A855F7 50%, #8B5CF6 100%);
-        border: 2px solid rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+        background: #E91E63;
       }
       
       .dark ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #DB2777 0%, #9333EA 50%, #7C3AED 100%);
-        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+        background: #F06292;
       }
       
       * {
