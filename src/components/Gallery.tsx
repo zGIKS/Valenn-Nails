@@ -4,32 +4,30 @@ import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getMediaAssets, type MediaItem } from '../utils/mediaAssets';
 import { translations } from '../utils/translations';
+import ResponsiveImage from './ResponsiveImage';
 
 const VideoComponent: React.FC<{ src: string; className: string; onError: (e: React.SyntheticEvent<HTMLVideoElement>) => void }> = ({ src, className, onError }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
-  const isVideoInView = useInView(videoContainerRef, { margin: "200px" });
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    if (videoRef.current && isVideoInView) {
-      const video = videoRef.current;
-      const playPromise = video.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          // Autoplay was prevented, try to play without sound
-          video.muted = true;
-          video.play().catch(() => {
-            // If still fails, at least show the first frame
-            video.load();
-          });
-        });
+  const handlePlayClick = async () => {
+    if (!videoRef.current) return;
+    
+    try {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        await videoRef.current.play();
+        setIsPlaying(true);
       }
+    } catch (error) {
+      console.warn('Video play failed:', error);
     }
-  }, [isVideoInView]);
+  };
 
   return (
-    <div ref={videoContainerRef} className="w-full h-auto">
+    <div className="w-full h-auto relative group">
       <video
         ref={videoRef}
         src={src}
@@ -39,7 +37,30 @@ const VideoComponent: React.FC<{ src: string; className: string; onError: (e: Re
         playsInline
         preload="metadata"
         onError={onError}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
+        onClick={handlePlayClick}
       />
+      
+      {/* Play/Pause button overlay */}
+      <button
+        onClick={handlePlayClick}
+        className="absolute inset-0 flex items-center justify-center bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-200"
+        aria-label={isPlaying ? "Pause video" : "Play video"}
+      >
+        <div className="bg-black/70 rounded-full p-3">
+          {isPlaying ? (
+            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+            </svg>
+          )}
+        </div>
+      </button>
     </div>
   );
 };
@@ -49,7 +70,7 @@ const Gallery: React.FC = () => {
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
   const [clickPosition, setClickPosition] = useState<{x: number, y: number, width: number, height: number} | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(galleryRef, { once: true, margin: "-100px" });
+  const isInView = useInView(galleryRef, { amount: 0.1 });
 
   const mediaItems = getMediaAssets(translations[language].designDescriptions);
 
@@ -111,18 +132,15 @@ const Gallery: React.FC = () => {
             >
               <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                 {item.type === 'image' ? (
-                  <img
+                  <ResponsiveImage
                     src={item.src}
                     alt={item.alt}
                     width={186}
                     height={248}
                     sizes="(max-width: 640px) 186px, 248px"
                     className="w-full h-auto object-cover transition-all duration-300 group-active:scale-95 rounded-lg"
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                    }}
+                    loading={index < 4 ? 'eager' : 'lazy'}
+                    priority={index < 4}
                   />
                 ) : (
                   <VideoComponent
@@ -191,18 +209,15 @@ const Gallery: React.FC = () => {
             >
               <div className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                 {item.type === 'image' ? (
-                  <img
+                  <ResponsiveImage
                     src={item.src}
                     alt={item.alt}
                     width={186}
                     height={248}
                     sizes="(max-width: 768px) 186px, (max-width: 1024px) 248px, 186px"
                     className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg"
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                    }}
+                    loading={index < 6 ? 'eager' : 'lazy'}
+                    priority={index < 6}
                   />
                 ) : (
                   <VideoComponent
@@ -216,7 +231,7 @@ const Gallery: React.FC = () => {
                 )}
                 
                 {/* Overlay simple en hover */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-all duration-300 flex items-center justify-center">
                   <div className="text-white text-center">
                     <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

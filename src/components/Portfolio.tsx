@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect } from 'react';
 import { LanguageProvider, useLanguage } from '../contexts/LanguageContext';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import GlobalStyles from './GlobalStyles';
@@ -6,10 +6,10 @@ import SmoothScroll from './SmoothScroll';
 import Header from './Header';
 import HeroLight from './HeroLight';
 
-// Lazy load components
-const Gallery = lazy(() => import('./Gallery'));
-const About = lazy(() => import('./About'));
-const Contact = lazy(() => import('./Contact'));
+// Direct imports for immediate loading
+import Gallery from './Gallery';
+import About from './About';
+import Contact from './Contact';
 
 const FooterContent: React.FC = () => {
   const { t } = useLanguage();
@@ -66,13 +66,11 @@ const Portfolio: React.FC = () => {
           <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
             <Header />
             
-            <main className="opacity-0 animate-fade-in">
+            <main className="animate-fade-in">
               <HeroLight />
-              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div></div>}>
-                <Gallery />
-                <About />
-                <Contact />
-              </Suspense>
+              <Gallery />
+              <About />
+              <Contact />
             </main>
 
           {/* Footer */}

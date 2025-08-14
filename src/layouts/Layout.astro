@@ -36,21 +36,43 @@ const { title } = Astro.props;
 		<link rel="dns-prefetch" href="//api.whatsapp.com">
 		<link rel="dns-prefetch" href="//instagram.com">
 		
-		<!-- Resource hints for faster loading -->
-		<link rel="prefetch" as="script" href="/src/components/Gallery.tsx">
-		<link rel="prefetch" as="script" href="/src/components/About.tsx">
+		<!-- Critical CSS inline to prevent render blocking -->
+		<style>
+			/* Inter font subset for critical text */
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 600;
+				font-display: swap;
+				src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2') format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-display: swap;
+				src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiA.woff2') format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+		</style>
 		
-		<!-- Optimized font loading -->
+		<!-- Optimized font loading - non-blocking -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		
 		<!-- Preconnect to critical external resources -->
 		<link rel="preconnect" href="https://api.whatsapp.com" />
 		<link rel="preconnect" href="https://instagram.com" />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;" />
-		<noscript>
-			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-		</noscript>
+		
 		
 		<!-- Critical CSS to prevent FOUC -->
 		<style>

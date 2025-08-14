@@ -4,11 +4,12 @@ import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import valeMeImage from '../assets/me/vale-me-optimized.webp?url';
+import ResponsiveImage from './ResponsiveImage';
 
 const About: React.FC = () => {
   const { t, language } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { amount: 0.1 });
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [profileClickPosition, setProfileClickPosition] = useState<{x: number, y: number, width: number, height: number} | null>(null);
   const currentTranslations = translations[language];
@@ -188,14 +189,15 @@ const About: React.FC = () => {
                 setShowProfileModal(true);
               }}
             >
-              <img 
+              <ResponsiveImage
                 src={valeMeImage} 
                 alt={currentTranslations.profileAlt}
                 width={380}
                 height={507}
                 sizes="(max-width: 768px) 380px, (max-width: 1024px) 507px, 380px"
                 className="w-full h-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
+                loading="eager"
+                priority={true}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 text-white">

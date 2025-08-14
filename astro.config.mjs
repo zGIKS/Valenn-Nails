@@ -18,9 +18,29 @@ export default defineConfig({
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            'framer-motion': ['framer-motion'],
-            'react-vendor': ['react', 'react-dom'],
+          manualChunks: (id) => {
+            // Core vendor libraries
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+              return 'react-vendor';
+            }
+            // Animation library
+            if (id.includes('node_modules/framer-motion')) {
+              return 'framer-motion';
+            }
+            // Component chunks for better caching
+            if (id.includes('src/components/Gallery')) {
+              return 'gallery';
+            }
+            if (id.includes('src/components/About')) {
+              return 'about';
+            }
+            if (id.includes('src/components/Contact')) {
+              return 'contact';
+            }
+            // Context and utilities
+            if (id.includes('src/contexts') || id.includes('src/utils')) {
+              return 'shared';
+            }
           }
         }
       },
@@ -30,9 +50,17 @@ export default defineConfig({
           drop_console: true,
           drop_debugger: true,
           unused: true,
-          dead_code: true
+          dead_code: true,
+          pure_funcs: ['console.log', 'console.info', 'console.debug'],
+          passes: 2
+        },
+        mangle: {
+          safari10: true
         }
-      }
+      },
+      target: 'esnext',
+      sourcemap: false,
+      cssCodeSplit: true
     }
   }
 });
