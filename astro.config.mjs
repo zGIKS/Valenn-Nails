@@ -7,6 +7,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [react(), tailwind()],
   output: 'static',
+  adapter: undefined,
   devToolbar: {
     enabled: false
   },
@@ -60,7 +61,8 @@ export default defineConfig({
       },
       target: 'esnext',
       sourcemap: false,
-      cssCodeSplit: true
+      cssCodeSplit: true,
+      assetsInlineLimit: 4096
     }
   }
 });
